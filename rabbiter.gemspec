@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.name = "rabbiter"
   spec.version = Rabbiter::VERSION.dup
   spec.rubyforge_project = "rabbit"
-  spec.homepage = "http://rabbit-shockers.org/rabbiter/"
+  spec.homepage = "http://rabbit-shockers.org/en/rabbiter/"
   spec.authors = ["Kouhei Sutou"]
   spec.email = ["kou@cozmixng.org"]
   spec.summary = "Rabbiter is a twitter client for Rabbit"
