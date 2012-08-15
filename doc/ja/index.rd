@@ -144,7 +144,7 @@ laterとすることに同意してもらったこととします。また、そ
 
 === リポジトリ
 
-rabbierのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/>))にあります。
+rabbiterのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/>))にあります。
 
 ((<Rabbitの開発ページユーザーページ
 |URL:http://rabbit-shockers.org/ja/users.html>))を参照してください。
