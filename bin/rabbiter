@@ -25,6 +25,7 @@ require "rabbiter"
 
 def parse(args=ARGV, logger=nil)
   Rabbit::Console.parse!(args, logger) do |opts, options|
+    options.version = Rabbiter::VERSION
     options.rabbit_uri = "druby://localhost:10101"
     options.filters = []
     options.user_languages = []
