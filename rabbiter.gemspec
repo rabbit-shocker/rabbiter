@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
     spec.executables = Dir.glob("*")
   end
 
-  spec.add_runtime_dependency("rabbit")
+  spec.add_runtime_dependency("rabbit", ">= 2.0.0")
   spec.add_runtime_dependency("gio2", ">= 1.1.4")
   spec.add_runtime_dependency("twitter_oauth")
   spec.add_runtime_dependency("twitter-stream", ">= 0.1.16")
