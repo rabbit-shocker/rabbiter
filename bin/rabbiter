@@ -26,38 +26,38 @@ require "rabbiter"
 include Rabbiter::GetText
 
 def parse(args=ARGV, logger=nil)
-  Rabbit::Console.parse!(args, logger) do |opts, options|
+  Rabbit::Console.parse!(args, logger) do |parser, options|
     options.version = Rabbiter::VERSION
     options.rabbit_uri = options.druby_uri
     options.filters = []
     options.user_languages = []
     options.log_status = false
 
-    opts.separator ""
+    parser.separator ""
 
-    opts.on("--rabbit-uri=URI",
-            _("Rabbit's dRuby URI"),
-            "(#{options.rabbit_uri})") do |uri|
+    parser.on("--rabbit-uri=URI",
+              _("Rabbit's dRuby URI"),
+              "(#{options.rabbit_uri})") do |uri|
       options.rabbit_uri = uri
     end
 
-    opts.on("--filter=FILTER",
-            _("Filter by word."),
-            _("To use multiple filters, use this option multiple.")) do |filter|
+    parser.on("--filter=FILTER",
+              _("Filter by word."),
+              _("To use multiple filters, use this option multiple.")) do |filter|
       options.filters << filter
     end
 
-    opts.on("--user-language=LANGUAGE",
-            _("Filter by user language."),
-            _("(e.g.: ja, en)"),
-            _("To use multiple language, use this option multiple.")) do |language|
+    parser.on("--user-language=LANGUAGE",
+              _("Filter by user language."),
+              _("(e.g.: ja, en)"),
+              _("To use multiple language, use this option multiple.")) do |language|
       options.user_languages << language
     end
 
-    opts.separator(_("Debug"))
+    parser.separator(_("Debug"))
 
-    opts.on("--[no-]log-status",
-            _("Log target statuses.")) do |boolean|
+    parser.on("--[no-]log-status",
+              _("Log target statuses.")) do |boolean|
       options.log_status = boolean
     end
   end
