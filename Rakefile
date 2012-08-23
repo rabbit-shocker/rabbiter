@@ -12,12 +12,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 require "rubygems"
 require "bundler/gem_helper"
+require "gettext/task"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 
@@ -29,12 +30,8 @@ end
 helper.install
 spec = helper.gemspec
 
-namespace :mo do
-  desc "Update .mo."
-  task :update do
-    ruby("update-mo.rb")
-  end
+GetText::Task.new(spec) do |task|
 end
 
-task :build => "mo:update"
-task :package => "mo:update"
+task :build => "gettext"
+task :package => "gettext"
