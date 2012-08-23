@@ -34,4 +34,3 @@ GetText::Task.new(spec) do |task|
 end
 
 task :build => "gettext"
-task :package => "gettext"
