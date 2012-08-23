@@ -117,8 +117,9 @@ module Rabbiter
       }
       client = TwitterOAuth::Client.new(oauth_options)
       request_token = client.request_token
-      puts(_("1) Access this URL: %{url}") % request_token.authorize_url)
-      print(_("2) Enter the PIN: "_)
+      format = _("1) Access this URL: %{url}")
+      puts(format % {:url => request_token.authorize_url})
+      print(_("2) Enter the PIN: "))
       pin = STDIN.gets.strip
       access_token = request_token.get_access_token(:oauth_verifier => pin)
       oauth_parameters = {

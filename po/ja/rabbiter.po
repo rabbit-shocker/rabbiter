@@ -1,5 +1,5 @@
 # Japanese translations for rabbiter package.
-# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2012  Kouhei Sutou <kou@cozmixng.org>
 # This file is distributed under the same license as the rabbiter package.
 # Kouhei Sutou <kou@cozmixng.org>, 2012.
 #
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rabbiter 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 17:17+0900\n"
-"PO-Revision-Date: 2012-08-23 17:11+0900\n"
+"POT-Creation-Date: 2012-08-23 17:25+0900\n"
+"PO-Revision-Date: 2012-08-23 17:25+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -19,52 +19,52 @@ msgstr ""
 
 #: ../lib/rabbiter.rb:96
 msgid "%{timeout} seconds (%{n_retries})"
-msgstr ""
+msgstr "%{timeout}秒 （%{n_retries}）"
 
 #: ../lib/rabbiter.rb:102
 msgid "Failed after %{n_retries} failed reconnects"
-msgstr ""
+msgstr "%{n_retries}回再接続が失敗したので中断しました。"
 
 #: ../lib/rabbiter.rb:120
 msgid "1) Access this URL: %{url}"
-msgstr ""
+msgstr "1) このURLにアクセスしてください: %{url}"
 
 #: ../lib/rabbiter.rb:121
 msgid "2) Enter the PIN: "
-msgstr ""
+msgstr "2) PINを入力してください: "
 
 #: ../bin/rabbiter:39
 msgid "Rabbit's dRuby URI"
-msgstr ""
+msgstr "RabbitのdRuby URI"
 
 #: ../bin/rabbiter:45
-msgid "Filter word for search Twitter."
-msgstr ""
+msgid "Filter by word."
+msgstr "単語でフィルターします。"
 
 #: ../bin/rabbiter:46
 msgid "To use multiple filters, use this option multiple."
-msgstr ""
+msgstr "複数のフィルターを使うときはこのオプションを複数回使ってください。"
 
 #: ../bin/rabbiter:51
 msgid "Filter by user language."
-msgstr ""
+msgstr "ユーザーの言語でフィルターします。"
 
 #: ../bin/rabbiter:52
 msgid "(e.g.: ja, en)"
-msgstr ""
+msgstr "（例: ja, en）"
 
 #: ../bin/rabbiter:53
 msgid "To use multiple language, use this option multiple."
-msgstr ""
+msgstr "複数の言語を指定するときはこのオプションを複数回使ってください。"
 
 #: ../bin/rabbiter:57
 msgid "Debug"
-msgstr ""
+msgstr "デバッグ"
 
 #: ../bin/rabbiter:60
 msgid "Log target statuses."
-msgstr ""
+msgstr "対象となるステータスをログに出力します。"
 
 #: ../bin/rabbiter:97
 msgid "must specify one or more filters by --filter"
-msgstr ""
+msgstr "--filterで1つ以上のフィルターを指定してください。"

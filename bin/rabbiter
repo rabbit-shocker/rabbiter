@@ -42,7 +42,7 @@ def parse(args=ARGV, logger=nil)
     end
 
     opts.on("--filter=FILTER",
-            _("Filter word for search Twitter."),
+            _("Filter by word."),
             _("To use multiple filters, use this option multiple.")) do |filter|
       options.filters << filter
     end
