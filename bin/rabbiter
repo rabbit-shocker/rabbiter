@@ -14,14 +14,16 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 require "drb/drb"
 
 require "rabbit/console"
 require "rabbiter"
+
+include Rabbiter::GetText
 
 def parse(args=ARGV, logger=nil)
   Rabbit::Console.parse!(args, logger) do |opts, options|
@@ -34,28 +36,28 @@ def parse(args=ARGV, logger=nil)
     opts.separator ""
 
     opts.on("--rabbit-uri=URI",
-            "Rabbit's dRuby URI",
+            _("Rabbit's dRuby URI"),
             "(#{options.rabbit_uri})") do |uri|
       options.rabbit_uri = uri
     end
 
     opts.on("--filter=FILTER",
-            "Filter word for search Twitter.",
-            "To use multiple filters, use this option multiple.") do |filter|
+            _("Filter word for search Twitter."),
+            _("To use multiple filters, use this option multiple.")) do |filter|
       options.filters << filter
     end
 
     opts.on("--user-language=LANGUAGE",
-            "Filter by user language.",
-            "(e.g.: ja, en)",
-            "To use multiple language, use this option multiple.") do |language|
+            _("Filter by user language."),
+            _("(e.g.: ja, en)"),
+            _("To use multiple language, use this option multiple.")) do |language|
       options.user_languages << language
     end
 
-    opts.separator "Debug"
+    opts.separator(_("Debug"))
 
     opts.on("--[no-]log-status",
-            "Log target statuses.") do |boolean|
+            _("Log target statuses.")) do |boolean|
       options.log_status = boolean
     end
   end
@@ -92,7 +94,7 @@ end
 def main
   options, logger = parse
   if options.filters.empty?
-    logger.error("must specify one or more filters by --filter")
+    logger.error(_("must specify one or more filters by --filter"))
     exit(false)
   end
 

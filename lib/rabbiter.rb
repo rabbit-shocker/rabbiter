@@ -25,11 +25,14 @@ require "twitter_oauth"
 require "rabbit/utils"
 
 require "rabbiter/version"
+require "rabbiter/gettext"
 
 module Rabbiter
   class Client
     CONSUMER_KEY = "wT9WSC0afRw94fxUw0iIKw"
     CONSUMER_SECRET = "mwY35vfQfmWde9lZbyNNB15QzCq3k2VwGj3X1IAkQ8"
+
+    include GetText
 
     def initialize(logger)
       @logger = logger
@@ -89,13 +92,16 @@ module Rabbiter
         @logger.error("[twitter] #{message}")
       end
 
-      @stream.on_reconnect do |timeout, retries|
-        @logger.info("[twitter][reconnect] #{timeout} seconds (#{retries})")
+      @stream.on_reconnect do |timeout, n_retries|
+        format = _("%{timeout} seconds (%{n_retries})")
+        message = format % {:timeout => timeout, :n_retries => retries}
+        @logger.info("[twitter][reconnect] #{message}")
       end
 
-      @stream.on_max_reconnects do |timeout, retries|
-        @logger.info("[twitter][max-reconnects] " +
-                     "Failed after #{retries} failed reconnects")
+      @stream.on_max_reconnects do |timeout, n_retries|
+        format = _("Failed after %{n_retries} failed reconnects")
+        message = format % {:n_retries => retries}
+        @logger.info("[twitter][max-reconnects] #{message}")
       end
 
       @connection.connect
@@ -111,8 +117,8 @@ module Rabbiter
       }
       client = TwitterOAuth::Client.new(oauth_options)
       request_token = client.request_token
-      puts "1) Access this URL: #{request_token.authorize_url}"
-      print "2) Enter the PIN: "
+      puts(_("1) Access this URL: %{url}") % request_token.authorize_url)
+      print(_("2) Enter the PIN: "_)
       pin = STDIN.gets.strip
       access_token = request_token.get_access_token(:oauth_verifier => pin)
       oauth_parameters = {
