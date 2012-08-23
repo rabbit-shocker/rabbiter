@@ -54,7 +54,7 @@ def parse(args=ARGV, logger=nil)
       options.user_languages << language
     end
 
-    parser.separator(_("Debug"))
+    parser.category(_("Debug"))
 
     parser.on("--[no-]log-status",
               _("Log target statuses.")) do |boolean|
