@@ -121,7 +121,7 @@ module Rabbiter
       puts( _("1) Access this URL: %{url}") % {:url => authorize_url})
       Gtk.show_uri(authorize_url) if Gtk.respond_to?(:show_uri)
       print(_("2) Enter the PIN: "))
-      pin = STDIN.gets.strip
+      pin = $stdin.gets.strip
       access_token = request_token.get_access_token(:oauth_verifier => pin)
       oauth_parameters = {
         :access_token => access_token.token,
