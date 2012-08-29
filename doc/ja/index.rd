@@ -4,11 +4,11 @@ title: Rabbiter
 ---
 == Rabbiterとは
 
-Rabbiterはtwitterから発表に関連するツイートを収集して、それをコメントと
+RabbiterはTwitterから発表に関連するツイートを収集して、それをコメントと
 してRabbitに流しこむためのツールです。
 
 日本Ruby会議など公開されたイベントで発表する場合は、観客が発表を聴きな
-がらコメントをtwitterに書き込むことが増えてきました。Rabbiterを使うとそ
+がらコメントをTwitterに書き込むことが増えてきました。Rabbiterを使うとそ
 のようなコメントをRabbitで表示しているスライド中に表示することができま
 す。
 
@@ -36,7 +36,7 @@ Rabbiterが収集するツイートは特定のキーワードで絞り込みま
   % rabbiter --filter "#rubykaigi"
 
 Rabbiterを起動した後にキーワードを含むツイートが投稿されるとすぐに収集
-します((-これは((<twitterのストリーミング
+します((-これは((<Twitterのストリーミング
 API|URL:https://dev.twitter.com/docs/streaming-apis>))というものを使っ
 ているからです。-))。
 
@@ -46,10 +46,10 @@ Rabbitが起動していない場合は以下のようなエラーメッセー�
   Rabbiter: DRb::DRbConnError: druby://localhost:10101 - #<Errno::ECONNREFUSED: 接続を拒否されました - connect(2)>
 
 RabbitとRabbiterはどちらを先に起動しても大丈夫です。上記のエラーメッセー
-ジが出力された後に以下のようにRabbitを起動してもスライド上にtwitterから
+ジが出力された後に以下のようにRabbitを起動してもスライド上にTwitterから
 のメッセージが表示されます。
 
-  % rabbit https://raw.github.com/shockers/rabbit/master/sample/theme-bench.rab
+  % rabbit rabbit-theme-bench-ja.gem
 
 今回の例の「#rubykaigi」は日本Ruby会議中以外はあまり使われないのでテス
 トには向いていません。動作確認をするなら「twitter」というキーワードがお
@@ -146,9 +146,6 @@ laterとすることに同意してもらったこととします。また、そ
 
 Rabbiterのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/>))にあります。
 
-((<Rabbitの開発ページユーザーページ
-|URL:http://rabbit-shockers.org/ja/users.html>))を参照してください。
-
 === コミットメール
 
 以下のメーリングリストにコミットメール毎に変更点が流れます。メーリング
@@ -163,11 +160,9 @@ Rabbiterのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/
 
 === バグの報告方法
 
-ご意見ご要望不具合報告等は作者へのメール、メーリングリスト（メーリング
-リストについては((<Rabbitのユーザーページ
-|URL:http://rabbit-shockers.org/ja/users.html>))を参照してください）、
-((<GitHubのIssues|URL:https://github.com/shockers/rabbiter/issues>))を
-ご利用ください。
+ご意見ご要望不具合報告等は作者へのメール、メーリングリスト、((<GitHubの
+Issues|URL:https://github.com/shockers/rabbiter/issues>))をご利用くださ
+い。
 
 == 感謝
 
