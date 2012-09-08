@@ -138,13 +138,13 @@ laterとすることに同意してもらったこととします。また、そ
 == メーリングリスト
 
 ((<Rabbitのユーザーページ
-|URL:http://rabbit-shockers.org/ja/users.html>))を参照してください。
+|URL:http://rabbit-shocker.org/ja/users.html>))を参照してください。
 
 == 開発への参加方法
 
 === リポジトリ
 
-Rabbiterのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/>))にあります。
+Rabbiterのリポジトリは((<GitHub|URL:https://github.com/rabbit-shocker/rabbiter/>))にあります。
 
 === コミットメール
 
@@ -161,7 +161,7 @@ Rabbiterのリポジトリは((<GitHub|URL:https://github.com/shockers/rabbiter/
 === バグの報告方法
 
 ご意見ご要望不具合報告等は作者へのメール、メーリングリスト、((<GitHubの
-Issues|URL:https://github.com/shockers/rabbiter/issues>))をご利用くださ
+Issues|URL:https://github.com/rabbit-shocker/rabbiter/issues>))をご利用くださ
 い。
 
 == 感謝

@@ -134,14 +134,14 @@ rules when they contribute their patches, codes and so on.
 == Mailing list
 
 See ((<Rabbit's users page
-|URL:http://rabbit-shockers.org/en/users.html>)).
+|URL:http://rabbit-shocker.org/en/users.html>)).
 
 == Join development
 
 === Repository
 
 Rabbiter's repository is
-((<GitHub|URL:https://github.com/shockers/rabbiter/>)).
+((<GitHub|URL:https://github.com/rabbit-shocker/rabbiter/>)).
 
 === Commit mail
 
@@ -158,7 +158,7 @@ to the ML, send an e-mail like the following.
 === Bug report
 
 Use the mailing list or ((<Issues on
-GitHub|URL:https://github.com/shockers/rabbiter/issues>)) for
+GitHub|URL:https://github.com/rabbit-shocker/rabbiter/issues>)) for
 reporting a bug or a request.
 
 == Thanks
