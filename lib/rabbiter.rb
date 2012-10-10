@@ -119,7 +119,7 @@ module Rabbiter
       request_token = client.request_token
       authorize_url = request_token.authorize_url
       puts( _("1) Access this URL: %{url}") % {:url => authorize_url})
-      Gtk.show_uri(authorize_url) if Gtk.respond_to?(:show_uri)
+      show_uri(authorize_url)
       print(_("2) Enter the PIN: "))
       pin = $stdin.gets.strip
       access_token = request_token.get_access_token(:oauth_verifier => pin)
@@ -130,6 +130,15 @@ module Rabbiter
       @config_file_path.open("w") do |config_file|
         config_file.chmod(0600)
         config_file.puts(YAML.dump(oauth_parameters))
+      end
+    end
+
+    def show_uri(uri)
+      return unless Gtk.respond_to?(:show_uri)
+      begin
+        Gtk.show_uri(uri)
+      rescue GLib::Error
+        @logger.warning("[twitter][show-uri] #{$!}")
       end
     end
 
