@@ -166,3 +166,15 @@ reporting a bug or a request.
 Here is a contributor list. Thanks to them!!!
 
   * OBATA Akio: He wrote the initial verison.
+  
+== Special OSX installation instructions
+
+Most packages necessary for rabbiter are commonly already installed.
+
+You must install the ((%glib-networking%)) package. If using homebrew to
+do this, install with 
+
+  % brew install glib-networking --with-curl-ca-bundle
+  
+This is necessary for the package to be installed with the CA certificates
+required to use the Twitter API over HTTPS.
