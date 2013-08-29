@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rabbiter 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 17:25+0900\n"
+"POT-Creation-Date: 2013-08-29 12:04+0900\n"
 "PO-Revision-Date: 2012-08-23 17:25+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
@@ -16,22 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: ../lib/rabbiter.rb:96
-msgid "%{timeout} seconds (%{n_retries})"
-msgstr "%{timeout}秒 （%{n_retries}）"
-
-#: ../lib/rabbiter.rb:102
-msgid "Failed after %{n_retries} failed reconnects"
-msgstr "%{n_retries}回再接続が失敗したので中断しました。"
-
-#: ../lib/rabbiter.rb:120
-msgid "1) Access this URL: %{url}"
-msgstr "1) このURLにアクセスしてください: %{url}"
-
-#: ../lib/rabbiter.rb:121
-msgid "2) Enter the PIN: "
-msgstr "2) PINを入力してください: "
 
 #: ../bin/rabbiter:39
 msgid "Rabbit's dRuby URI"
@@ -68,3 +52,19 @@ msgstr "対象となるステータスをログに出力します。"
 #: ../bin/rabbiter:97
 msgid "must specify one or more filters by --filter"
 msgstr "--filterで1つ以上のフィルターを指定してください。"
+
+#: ../lib/rabbiter.rb:96
+msgid "%{timeout} seconds (%{n_retries})"
+msgstr "%{timeout}秒 （%{n_retries}）"
+
+#: ../lib/rabbiter.rb:102
+msgid "Failed after %{n_retries} failed reconnects"
+msgstr "%{n_retries}回再接続が失敗したので中断しました。"
+
+#: ../lib/rabbiter.rb:121
+msgid "1) Access this URL: %{url}"
+msgstr "1) このURLにアクセスしてください: %{url}"
+
+#: ../lib/rabbiter.rb:123
+msgid "2) Enter the PIN: "
+msgstr "2) PINを入力してください: "
