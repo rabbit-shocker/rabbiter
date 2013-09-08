@@ -149,7 +149,7 @@ You can stay up to date on the latest development by
 subscribing to the git commit ML. If you want to subscribe
 to the ML, send an e-mail like the following.
 
-  To: rabbit-commit@ml.cozmixng.org
+  To: rabbit-commit@ml.rabbit-shocker.org
   Cc: null@cozmixng.org
   Subject: Subscribe
 

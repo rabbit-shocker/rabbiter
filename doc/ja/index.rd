@@ -152,7 +152,7 @@ Rabbiterのリポジトリは((<GitHub|URL:https://github.com/rabbit-shocker/rab
 リストに参加することで開発状況を確認できます。メーリングリストに参加す
 るには以下のようなメールを送信してください。
 
-  To: rabbit-commit@ml.cozmixng.org
+  To: rabbit-commit@ml.rabbit-shocker.org
   Cc: null@cozmixng.org
   Subject: 登録
 
