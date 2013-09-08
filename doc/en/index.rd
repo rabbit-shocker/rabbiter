@@ -37,6 +37,9 @@ do this, install with
 This is necessary for the package to be installed with the CA certificates
 required to use the Twitter API over HTTPS.
 
+TODO: Install ((%glib-networking%)) package with
+((%--with-curl-ca-bundle%)) automatically.
+
 == Usage
 
 Rabbiter filters target tweets by specified keywords. It's good idea
