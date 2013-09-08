@@ -26,6 +26,22 @@ RubyGemsでインストールできます。関連パッケージも一緒にイ
 
   % gem install rabbiter
 
+=== OS X特有のインストール手順
+
+Rabbiterに必要なパッケージは自動でインストールされますが、OS Xでは足り
+ないパッケージがあります。
+
+((%glib-networking%))パッケージを自分でインストールする必要があります。
+Homebrewを使っているなら以下のようにインストールしてください。
+
+  % brew install glib-networking --with-curl-ca-bundle
+
+HTTPSでTwitter APIを使うためにCA証明書付きでこのパッケージをインストー
+ルする必要があります。
+
+TODO: 自動で((%--with-curl-ca-bundle%))オプション付きで
+((%glib-networking%))パッケージをインストールするようにする。
+
 == 使い方
 
 Rabbiterが収集するツイートは特定のキーワードで絞り込みます。最近のイベ
