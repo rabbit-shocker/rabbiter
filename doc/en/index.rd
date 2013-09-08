@@ -25,7 +25,7 @@ installed.
 
   % gem install rabbiter
 
-=== Special OSX installation instructions
+=== Special OS X installation instructions
 
 Most packages necessary for Rabbiter are commonly already installed.
 
