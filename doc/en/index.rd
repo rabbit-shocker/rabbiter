@@ -28,7 +28,7 @@ installed.
 
 === Special OSX installation instructions
 
-Most packages necessary for rabbiter are commonly already installed.
+Most packages necessary for Rabbiter are commonly already installed.
 
 You must install the ((%glib-networking%)) package. If using homebrew to
 do this, install with
