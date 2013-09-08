@@ -29,7 +29,7 @@ installed.
 
 Most packages necessary for Rabbiter are commonly already installed.
 
-You must install the ((%glib-networking%)) package. If using homebrew to
+You must install the ((%glib-networking%)) package. If using Homebrew to
 do this, install with
 
   % brew install glib-networking --with-curl-ca-bundle
