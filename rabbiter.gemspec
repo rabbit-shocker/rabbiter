@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2012 Kouhei Sutou <kou@cozmixng.org>
+# Copyright (C) 2012-2014 Kouhei Sutou <kou@cozmixng.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_runtime_dependency("rabbit", ">= 2.0.0")
-  spec.add_runtime_dependency("gio2", ">= 1.1.4")
+  spec.add_runtime_dependency("gio2", ">= 2.1.1")
   spec.add_runtime_dependency("twitter_oauth")
   spec.add_runtime_dependency("twitter-stream", ">= 0.1.16")
 

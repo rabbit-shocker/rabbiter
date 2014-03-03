@@ -162,31 +162,31 @@ module Rabbiter
           @client.tls_validation_flags -= :unknown_ca
         end
         @connection = @client.connect_to_host(@options[:host], @options[:port])
-        @socket = @connection.socket
-        @socket.blocking = false
         @input = @connection.input_stream
         @output = @connection.output_stream
 
-        reader_source = @socket.create_source(:in) do |socket, condition|
+        reader_source = @input.create_source do |stream|
           @logger.debug("[twitter][read][start]")
-          data = @input.read(8192) || ""
-          @logger.debug("[twitter][read][done] #{data.bytesize}")
-          if data.empty?
-            @source_ids.reject! {|id| id == reader_source.id}
-            @logger.debug("[twitter][read][eof]")
-            false
-          else
-            @handler.receive_data(data)
+          begin
+            data = @input.read_nonblocking(8192)
+          rescue GLib::Error => error
+            if error.code == Gio::IOErrorEnum::WOULD_BLOCK
+              data = ""
+            else
+              @logger.debug("[twitter][read][error] #{error}")
+              @handler.send(:receive_error, "#{error.class}: #{error}")
+              data = nil
+            end
+          end
+          if data
+            @logger.debug("[twitter][read][done] #{data.bytesize}")
+            @handler.receive_data(data) unless data.empty?
             true
+          else
+            false
           end
         end
         @source_ids << reader_source.attach
-
-        error_source = @socket.create_source(:err) do |socket, condition|
-          @handler.send(:receive_error, condition)
-          true
-        end
-        @source_ids << error_source.attach
 
         @handler.extend(GLibAdapter)
         @handler.connection = self
@@ -195,7 +195,7 @@ module Rabbiter
 
       def send_data(data)
         rest = data.bytesize
-        writer_source = @socket.create_source(:out) do |socket, condition|
+        writer_source = @output.create_source do |stream|
           if rest.zero?
             @logger.debug("[twitter][flush][start]")
             @output.flush
@@ -204,7 +204,7 @@ module Rabbiter
             false
           else
             @logger.debug("[twitter][write][start]")
-            written_size = @output.write(data)
+            written_size = @output.write_nonblocking(data)
             @logger.debug("[twitter][write][done] #{written_size}")
             rest -= written_size
             data[0, written_size] = ""
@@ -220,8 +220,6 @@ module Rabbiter
           GLib::Source.remove(id)
           true
         end
-        @socket.close
-        @socket = nil
         @input = nil
         @output = nil
         @connection = nil
