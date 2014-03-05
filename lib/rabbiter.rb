@@ -1,4 +1,4 @@
-# Copyright (C) 2010-2012  Kouhei Sutou <kou@cozmixng.org>
+# Copyright (C) 2010-2014  Kouhei Sutou <kou@cozmixng.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -169,14 +169,12 @@ module Rabbiter
           @logger.debug("[twitter][read][start]")
           begin
             data = @input.read_nonblocking(8192)
-          rescue GLib::Error => error
-            if error.code == Gio::IOErrorEnum::WOULD_BLOCK
+          rescue Gio::IOError::WouldBlock
               data = ""
-            else
-              @logger.debug("[twitter][read][error] #{error}")
-              @handler.send(:receive_error, "#{error.class}: #{error}")
-              data = nil
-            end
+          rescue => error
+            @logger.debug("[twitter][read][error] #{error}")
+            @handler.send(:receive_error, "#{error.class}: #{error}")
+            data = nil
           end
           if data
             @logger.debug("[twitter][read][done] #{data.bytesize}")
