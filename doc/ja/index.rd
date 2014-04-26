@@ -36,9 +36,6 @@ Homebrewを使っているなら以下のようにインストールしてくだ
 
   % brew install glib-networking
 
-HTTPSでTwitter APIを使うためにCA証明書付きでこのパッケージをインストー
-ルする必要があります。
-
 == 使い方
 
 Rabbiterが収集するツイートは特定のキーワードで絞り込みます。最近のイベ
