@@ -34,13 +34,10 @@ Rabbiterに必要なパッケージは自動でインストールされますが
 ((%glib-networking%))パッケージを自分でインストールする必要があります。
 Homebrewを使っているなら以下のようにインストールしてください。
 
-  % brew install glib-networking --with-curl-ca-bundle
+  % brew install glib-networking
 
 HTTPSでTwitter APIを使うためにCA証明書付きでこのパッケージをインストー
 ルする必要があります。
-
-TODO: 自動で((%--with-curl-ca-bundle%))オプション付きで
-((%glib-networking%))パッケージをインストールするようにする。
 
 == 使い方
 
