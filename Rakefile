@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2012  Kouhei Sutou <kou@cozmixng.org>
+# Copyright (C) 2012-2014  Kouhei Sutou <kou@cozmixng.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 require "rubygems"
 require "bundler/gem_helper"
-require "gettext/task"
+require "gettext/tools/task"
 
 base_dir = File.expand_path(File.dirname(__FILE__))
 
@@ -30,7 +30,8 @@ end
 helper.install
 spec = helper.gemspec
 
-GetText::Task.new(spec) do |task|
+GetText::Tools::Task.define do |task|
+  task.spec = spec
 end
 
 task :build => "gettext"
