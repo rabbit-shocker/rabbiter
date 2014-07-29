@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.files = ["Rakefile", "COPYING", "GPL", "README"]
   spec.files += ["Gemfile", "#{spec.name}.gemspec"]
   spec.files += Dir.glob("lib/**/*.rb")
+  spec.files += Dir.glob("doc/**/*.*")
   spec.files += Dir.glob("po/**/*.po")
   spec.files += Dir.glob("locale/**/*.mo")
   Dir.chdir("bin") do
