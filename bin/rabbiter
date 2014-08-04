@@ -19,6 +19,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 require "drb/drb"
+require "uri"
 
 require "rabbit/console"
 require "rabbiter"
@@ -31,6 +32,7 @@ def parse(args=ARGV, logger=nil)
     options.rabbit_uri = options.druby_uri
     options.filters = []
     options.user_languages = []
+    options.resolve_shorten_url = true
     options.log_status = false
 
     parser.separator ""
@@ -54,6 +56,12 @@ def parse(args=ARGV, logger=nil)
       options.user_languages << language
     end
 
+    parser.on("--[no-]resolve-shorten-url",
+              _("Resolve shorten URL such as http://t.co/XXX."),
+              "(#{options.resolve_shorten_url})") do |boolean|
+      options.resolve_shorten_url = boolean
+    end
+
     parser.category(_("Debug"))
 
     parser.on("--[no-]log-status",
@@ -72,8 +80,14 @@ def target?(status, options)
   options.user_languages.include?(user_lang)
 end
 
-def clean_text(text, filters)
-  remove_ustream_link(remove_hash_tag(text, filters))
+def clean_text(text, options)
+  cleaned_text = text
+  cleaned_text = remove_hash_tag(cleaned_text, options.filters)
+  if options.resolve_shorten_url
+    cleaned_text = resolve_shorten_urls(cleaned_text)
+  end
+  cleaned_text = remove_ustream_link(cleaned_text)
+  cleaned_text
 end
 
 def remove_hash_tag(text, filters)
@@ -85,6 +99,29 @@ def remove_hash_tag(text, filters)
     end
   end
   text.gsub(Regexp.union(*hash_tag_regexps), "")
+end
+
+def resolve_t_co(url_text)
+  uri = URI(url_text)
+  Net::HTTP.start(uri.host, uri.port) do |http|
+    response = http.head(uri.path)
+    response["location"] || url_text
+  end
+end
+
+def resolve_shorten_url(url_text)
+  if url_text.start_with?("http://t.co/")
+    resolve_t_co(url_text)
+  else
+    url_text
+  end
+end
+
+def resolve_shorten_urls(text)
+  parser = URI::Parser.new
+  text.gsub(parser.make_regexp(["http"])) do |url_text|
+    resolve_shorten_url(url_text)
+  end
 end
 
 def remove_ustream_link(text)
@@ -104,7 +141,7 @@ def main
     text = status["text"]
     next if text.nil?
     next unless target?(status, options)
-    text = clean_text(status['text'], options.filters)
+    text = clean_text(status['text'], options)
     comment = "@#{status['user']['screen_name']}: #{text}"
     logger.info(comment)
     begin
