@@ -115,25 +115,16 @@ def resolve_shorten_url(url_text)
 end
 
 def resolve_urls(status, options)
-  text = status["text"]
-  resoleved_text = ""
-  last_position = 0
-  status["entities"]["urls"].each do |url|
-    if last_position < url["indices"][0]
-      resoleved_text << text[last_position .. url["indices"][0] - 1]
-    end
-    if options.resolve_shorten_url
-      resoleved_text << resolve_shorten_url(url["expanded_url"])
-    else
-      resoleved_text << url["display_url"]
-    end
-    last_position = url["indices"][1] + 1
+  resolved_text = status["text"].dup
+  reversed_urls = status["entities"]["urls"].sort_by do |url|
+    start_position, _ = url["indices"]
+    -start_position
   end
-  if text.length > last_position
-    resoleved_text << text[last_position .. -1]
-  else
-    resoleved_text
+  reversed_urls.each do |url|
+    start_position, end_position = url["indices"]
+    resolved_text[start_position...end_position] = url["expanded_url"]
   end
+  resolved_text
 end
 
 def remove_ustream_link(text)
