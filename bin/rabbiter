@@ -81,8 +81,13 @@ def target?(status, options)
 end
 
 def clean_text(status, options)
-  cleaned_text = resolve_urls(status, options)
-  cleaned_text = remove_hash_tag(cleaned_text, options.filters)
+  raw_text = status["text"]
+  if options.resolve_shorten_url
+    target_text = resolve_shorten_urls(raw_text, status, options)
+  else
+    target_text = raw_text
+  end
+  cleaned_text = remove_hash_tag(target_text, options.filters)
   cleaned_text = remove_ustream_link(cleaned_text)
   cleaned_text
 end
@@ -114,15 +119,16 @@ def resolve_shorten_url(url_text)
   end
 end
 
-def resolve_urls(status, options)
-  resolved_text = status["text"].dup
+def resolve_shorten_urls(raw_text, status, options)
+  resolved_text = raw_text.dup
   reversed_urls = status["entities"]["urls"].sort_by do |url|
     start_position, _ = url["indices"]
     -start_position
   end
   reversed_urls.each do |url|
     start_position, end_position = url["indices"]
-    resolved_text[start_position...end_position] = url["expanded_url"]
+    resolved_url_text = resolve_shorten_url(url["expanded_url"])
+    resolved_text[start_position...end_position] = resolved_url_text
   end
   resolved_text
 end
