@@ -80,12 +80,9 @@ def target?(status, options)
   options.user_languages.include?(user_lang)
 end
 
-def clean_text(text, options)
-  cleaned_text = text
+def clean_text(status, options)
+  cleaned_text = resolve_urls(status, options)
   cleaned_text = remove_hash_tag(cleaned_text, options.filters)
-  if options.resolve_shorten_url
-    cleaned_text = resolve_shorten_urls(cleaned_text)
-  end
   cleaned_text = remove_ustream_link(cleaned_text)
   cleaned_text
 end
@@ -117,10 +114,25 @@ def resolve_shorten_url(url_text)
   end
 end
 
-def resolve_shorten_urls(text)
-  parser = URI::Parser.new
-  text.gsub(parser.make_regexp(["http"])) do |url_text|
-    resolve_shorten_url(url_text)
+def resolve_urls(status, options)
+  text = status["text"]
+  clear_text = ""
+  last_position = 0
+  status["entities"]["urls"].each do |url|
+    if last_position < url["indices"][0]
+      clear_text << text[last_position .. url["indices"][0] - 1] 
+    end
+    if options.resolve_shorten_url
+      clear_text << resolve_shorten_url(url["expanded_url"])
+    else
+      clear_text << url["display_url"]
+    end
+    last_position = url["indices"][1] + 1
+  end
+  if text.length > last_position
+    clear_text << text[last_position .. -1]
+  else
+    clear_text
   end
 end
 
@@ -141,7 +153,7 @@ def main
     text = status["text"]
     next if text.nil?
     next unless target?(status, options)
-    text = clean_text(status['text'], options)
+    text = clean_text(status, options)
     comment = "@#{status['user']['screen_name']}: #{text}"
     logger.info(comment)
     begin
