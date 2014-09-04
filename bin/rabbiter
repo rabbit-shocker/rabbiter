@@ -116,23 +116,23 @@ end
 
 def resolve_urls(status, options)
   text = status["text"]
-  clear_text = ""
+  resoleved_text = ""
   last_position = 0
   status["entities"]["urls"].each do |url|
     if last_position < url["indices"][0]
-      clear_text << text[last_position .. url["indices"][0] - 1]
+      resoleved_text << text[last_position .. url["indices"][0] - 1]
     end
     if options.resolve_shorten_url
-      clear_text << resolve_shorten_url(url["expanded_url"])
+      resoleved_text << resolve_shorten_url(url["expanded_url"])
     else
-      clear_text << url["display_url"]
+      resoleved_text << url["display_url"]
     end
     last_position = url["indices"][1] + 1
   end
   if text.length > last_position
-    clear_text << text[last_position .. -1]
+    resoleved_text << text[last_position .. -1]
   else
-    clear_text
+    resoleved_text
   end
 end
 
