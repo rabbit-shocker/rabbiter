@@ -149,7 +149,6 @@ module Rabbiter
         @options = @handler.instance_variable_get("@options")
         @client = nil
         @connection = nil
-        @socket = nil
         @source_ids = []
       end
 
