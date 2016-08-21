@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 #
-# Copyright (C) 2010-2012  Kouhei Sutou <kou@cozmixng.org>
+# Copyright (C) 2010-2016  Kouhei Sutou <kou@cozmixng.org>
 # Copyright (C) 2010       OBATA Akio <obata@lins.jp>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -73,15 +73,15 @@ end
 
 def target?(status, options)
   return true if options.user_languages.empty?
-  user = status["user"]
+  user = status.user
   return false if user.nil?
-  user_lang = user["lang"]
+  user_lang = user.lang
   return false if user_lang.nil?
   options.user_languages.include?(user_lang)
 end
 
 def clean_text(status, options)
-  raw_text = status["text"]
+  raw_text = status.full_text
   if options.resolve_shorten_url
     target_text = resolve_shorten_urls(raw_text, status, options)
   else
@@ -103,38 +103,44 @@ def remove_hash_tag(text, filters)
   text.gsub(Regexp.union(*hash_tag_regexps), "")
 end
 
-def resolve_t_co(url_text)
-  uri = URI(url_text)
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    response = http.head(uri.path)
-    response["location"] || url_text
+def resolve_t_co(url)
+  Net::HTTP.start(url.host, url.port) do |http|
+    response = http.head(url.path)
+    location = response["location"]
+    if location
+      URI(location)
+    else
+      url
+    end
   end
 end
 
-def resolve_shorten_url(url_text)
-  if url_text.start_with?("http://t.co/")
-    resolve_t_co(url_text)
+def resolve_shorten_url(url)
+  case url.host
+  when "t.co"
+    resolve_t_co
   else
-    url_text
+    url
   end
 end
 
 def resolve_shorten_urls(raw_text, status, options)
   resolved_text = raw_text.dup
-  reversed_urls = status["entities"]["urls"].sort_by do |url|
-    start_position, _ = url["indices"]
+  target_urls = status.urls + status.media.uniq {|media| media.id}
+  reversed_urls = target_urls.sort_by do |url|
+    start_position, _ = url.indices
     -start_position
   end
   reversed_urls.each do |url|
-    start_position, end_position = url["indices"]
-    resolved_url_text = resolve_shorten_url(url["expanded_url"])
-    resolved_text[start_position...end_position] = resolved_url_text
+    start_position, end_position = url.indices
+    resolved_url = resolve_shorten_url(url.expanded_url)
+    resolved_text[start_position...end_position] = resolved_url.to_s
   end
   resolved_text
 end
 
 def remove_ustream_link(text)
-  text.gsub(/\(.* live at http:\/\/ustre\.am\/.*\)/, "")
+  text.gsub(/\(.* live at https:\/\/ustre\.am\/.*\)/, "")
 end
 
 def main
@@ -147,11 +153,11 @@ def main
   rabbit = DRbObject.new_with_uri(options.rabbit_uri)
   client = Rabbiter::Client.new(logger)
   client.start(*options.filters) do |status|
-    text = status["text"]
+    text = status.full_text
     next if text.nil?
     next unless target?(status, options)
     text = clean_text(status, options)
-    comment = "@#{status['user']['screen_name']}: #{text}"
+    comment = "@#{status.user.screen_name}: #{text}"
     logger.info(comment)
     begin
       rabbit.append_comment(comment)
