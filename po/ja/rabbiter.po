@@ -7,8 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rabbiter 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:04+0900\n"
-"PO-Revision-Date: 2012-08-23 17:25+0900\n"
+"PO-Revision-Date: 2016-08-21 16:42+0900\n"
 "Last-Translator: Kouhei Sutou <kou@cozmixng.org>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -17,54 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../bin/rabbiter:39
 msgid "Rabbit's dRuby URI"
 msgstr "RabbitのdRuby URI"
 
-#: ../bin/rabbiter:45
 msgid "Filter by word."
 msgstr "単語でフィルターします。"
 
-#: ../bin/rabbiter:46
 msgid "To use multiple filters, use this option multiple."
 msgstr "複数のフィルターを使うときはこのオプションを複数回使ってください。"
 
-#: ../bin/rabbiter:51
 msgid "Filter by user language."
 msgstr "ユーザーの言語でフィルターします。"
 
-#: ../bin/rabbiter:52
 msgid "(e.g.: ja, en)"
 msgstr "（例: ja, en）"
 
-#: ../bin/rabbiter:53
 msgid "To use multiple language, use this option multiple."
 msgstr "複数の言語を指定するときはこのオプションを複数回使ってください。"
 
-#: ../bin/rabbiter:57
+msgid "Resolve shorten URL such as https://t.co/XXX."
+msgstr "https://t.co/XXX のような短縮URLを展開します。"
+
 msgid "Debug"
 msgstr "デバッグ"
 
-#: ../bin/rabbiter:60
 msgid "Log target statuses."
 msgstr "対象となるステータスをログに出力します。"
 
-#: ../bin/rabbiter:97
 msgid "must specify one or more filters by --filter"
 msgstr "--filterで1つ以上のフィルターを指定してください。"
 
-#: ../lib/rabbiter.rb:96
-msgid "%{timeout} seconds (%{n_retries})"
-msgstr "%{timeout}秒 （%{n_retries}）"
-
-#: ../lib/rabbiter.rb:102
-msgid "Failed after %{n_retries} failed reconnects"
-msgstr "%{n_retries}回再接続が失敗したので中断しました。"
-
-#: ../lib/rabbiter.rb:121
 msgid "1) Access this URL: %{url}"
 msgstr "1) このURLにアクセスしてください: %{url}"
 
-#: ../lib/rabbiter.rb:123
 msgid "2) Enter the PIN: "
 msgstr "2) PINを入力してください: "

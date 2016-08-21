@@ -57,7 +57,7 @@ def parse(args=ARGV, logger=nil)
     end
 
     parser.on("--[no-]resolve-shorten-url",
-              _("Resolve shorten URL such as http://t.co/XXX."),
+              _("Resolve shorten URL such as https://t.co/XXX."),
               "(#{options.resolve_shorten_url})") do |boolean|
       options.resolve_shorten_url = boolean
     end
