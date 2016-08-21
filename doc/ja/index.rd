@@ -26,16 +26,6 @@ RubyGemsでインストールできます。関連パッケージも一緒にイ
 
   % gem install rabbiter
 
-=== OS X特有のインストール手順
-
-Rabbiterに必要なパッケージは自動でインストールされますが、OS Xでは足り
-ないパッケージがあります。
-
-((%glib-networking%))パッケージを自分でインストールする必要があります。
-Homebrewを使っているなら以下のようにインストールしてください。
-
-  % brew install glib-networking
-
 == 使い方
 
 Rabbiterが収集するツイートは特定のキーワードで絞り込みます。最近のイベ

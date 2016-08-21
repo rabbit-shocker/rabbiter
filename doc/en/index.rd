@@ -25,15 +25,6 @@ installed.
 
   % gem install rabbiter
 
-=== Special OS X installation instructions
-
-Most packages necessary for Rabbiter are commonly already installed.
-
-You must install the ((%glib-networking%)) package. If you are using
-Homebrew, use the following command to install the package:
-
-  % brew install glib-networking
-
 == Usage
 
 Rabbiter filters target tweets by specified keywords. It's good idea
