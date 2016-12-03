@@ -132,8 +132,10 @@ def resolve_shorten_urls(raw_text, status, options)
     -start_position
   end
   reversed_urls.each do |url|
+    expanded_url = url.expanded_url
+    next if expanded_url.nil?
     start_position, end_position = url.indices
-    resolved_url = resolve_shorten_url(url.expanded_url)
+    resolved_url = resolve_shorten_url(expanded_url)
     resolved_text[start_position...end_position] = resolved_url.to_s
   end
   resolved_text
