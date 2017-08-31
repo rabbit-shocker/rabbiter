@@ -109,11 +109,18 @@ module Rabbiter
     end
 
     def show_uri(uri)
-      return unless Gtk.respond_to?(:show_uri)
-      begin
-        Gtk.show_uri(uri)
-      rescue GLib::Error
-        @logger.warning("[twitter][show-uri] #{$!}")
+      if Gtk.respond_to?(:show_uri_on_window)
+        begin
+          Gtk.show_uri_on_window(nil, uri, Gdk::CURRENT_TIME)
+        rescue GLib::ErrorInfo
+          @logger.warning("[twitter][show-uri] #{$!}")
+        end
+      elsif Gtk.respond_to?(:show_uri)
+        begin
+          Gtk.show_uri(uri)
+        rescue GLib::ErrorInfo
+          @logger.warning("[twitter][show-uri] #{$!}")
+        end
       end
     end
   end
